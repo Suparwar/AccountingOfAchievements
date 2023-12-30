@@ -4,6 +4,7 @@ using AccountingOfAchievements.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccountingOfAchievements.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20231130122045_second")]
+    partial class second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,10 +30,6 @@ namespace AccountingOfAchievements.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AchievementType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateOfReceiving")
                         .HasColumnType("datetime2");
@@ -47,11 +46,7 @@ namespace AccountingOfAchievements.Infrastructure.Migrations
 
                     b.HasIndex("PortfolioId");
 
-                    b.ToTable("Achievements", (string)null);
-
-                    b.HasDiscriminator<string>("AchievementType").HasValue("Achievement");
-
-                    b.UseTphMappingStrategy();
+                    b.ToTable("Achievements");
                 });
 
             modelBuilder.Entity("AccountingOfAchievements.Domain.Model.Portfolio", b =>
@@ -82,57 +77,6 @@ namespace AccountingOfAchievements.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Organizations");
-                });
-
-            modelBuilder.Entity("AccountingOfAchievements.Domain.Model.AcademicAchievement", b =>
-                {
-                    b.HasBaseType("AccountingOfAchievements.Domain.Model.Achievement");
-
-                    b.Property<string>("AcademArea")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AreaStage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("Academic");
-                });
-
-            modelBuilder.Entity("AccountingOfAchievements.Domain.Model.ArtAchievement", b =>
-                {
-                    b.HasBaseType("AccountingOfAchievements.Domain.Model.Achievement");
-
-                    b.Property<string>("AreaStage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameOfCompet")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("Achievements", t =>
-                        {
-                            t.Property("AreaStage")
-                                .HasColumnName("ArtAchievement_AreaStage");
-                        });
-
-                    b.HasDiscriminator().HasValue("Art");
-                });
-
-            modelBuilder.Entity("AccountingOfAchievements.Domain.Model.SportAchievement", b =>
-                {
-                    b.HasBaseType("AccountingOfAchievements.Domain.Model.Achievement");
-
-                    b.Property<string>("KindOfSport")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TeamName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("Sport");
                 });
 
             modelBuilder.Entity("AccountingOfAchievements.Domain.Model.Achievement", b =>

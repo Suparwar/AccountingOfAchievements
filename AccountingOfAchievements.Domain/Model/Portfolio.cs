@@ -4,17 +4,17 @@ namespace AccountingOfAchievements.Domain.Model;
 
 public class Portfolio
 {
-    public Guid PortfolioId { get; set; }
+    public Guid Id { get; set; }
     public string UserName { get; set; } = String.Empty;
-    public List<Achievement> PersonalPortfolio { get; set; } = new List<Achievement>();
+    public List<Achievement> Achievements { get; set; } = new List<Achievement>();
 
     public void AddPersonalAchiev(Achievement achiev)
     {
-        PersonalPortfolio.Add(achiev);
+        Achievements.Add(achiev);
     }
 
     public void RemovePersonalAchiv(Achievement achiev)
     {
-        PersonalPortfolio.Remove(achiev);
+        Achievements.Remove(achiev);
     }
 }

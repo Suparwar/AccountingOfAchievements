@@ -2,10 +2,10 @@
 
 public class Achievement
 {
-    public Guid AchievementId { get; set; }
-    public Portfolio? Owner { get; set; }
+    public Guid Id { get; set; }
+    public Portfolio Portfolio { get; set; }
     public DateTime DateOfReceiving { get; set; }
-    public Organization? IssuedFrom { get; set; }
+    public Organization IssuedFrom { get; set; }
 }
 
 public class SportAchievement:Achievement

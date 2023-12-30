@@ -1,5 +1,8 @@
 ﻿using AccountingOfAchievements.Domain;
+using AccountingOfAchievements.Domain.DTO;
 using AccountingOfAchievements.Domain.Model;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace AccountingOfAchievements.Infrastructure.Migrations;
 
@@ -8,7 +11,7 @@ public class OrganizationsRepository
     private readonly Context _context;
     public Context UnitOfWork
     {
-        get {  return _context; }
+        get { return _context; }
     }
     public OrganizationsRepository(Context context)
     {
@@ -16,7 +19,7 @@ public class OrganizationsRepository
     }
 
 
-     // добавление и удаление организаций
+    // добавление и удаление организаций
     public async Task<Organization> AddAsync(Organization organization)
     {
         _context.Organizations.Add(organization);
@@ -30,7 +33,7 @@ public class OrganizationsRepository
     }
 
 
-    // гетер по ID и name
+    // гетер
     public async Task<Organization?> GetByIdAsync(Guid id)
     {
         return await _context.Organizations.FindAsync(id);
@@ -39,23 +42,30 @@ public class OrganizationsRepository
     {
         return await _context.Organizations.FindAsync(name);
     }
-
-
-    // добавление и удаление достижений
-    public async Task<Achievement> AddAchievementAsync(Achievement achievement)
+    public async Task<List<Organization>> GetAllAsync()
     {
-        _context.Achievements.Add(achievement);
-        await _context.SaveChangesAsync();
-        return achievement;
+        return await _context.Organizations.OrderBy(o => o.Name).ToListAsync();
     }
-    public async Task DeleteAchievementAsync(Achievement achievement)
-    {
-        _context.Achievements.Remove(achievement);
-        await _context.SaveChangesAsync();
-    }
+
 
     // обновление
-    // ...
+    public async Task UpdateAsync(Organization organization)
+    {
+        var existOrganization = GetByIdAsync(organization.Id).Result;
+        if (existOrganization != null)
+        {
+            // обновление полей
+            _context.Entry(existOrganization).CurrentValues.SetValues(organization);
+
+            // замена Организации в достижении в листе достижений организации
+            foreach (var exAchiv in existOrganization.Achievements)
+            {
+                _context.Entry(exAchiv.IssuedFrom).CurrentValues.SetValues(organization);
+            }
+        }
+
+        await _context.SaveChangesAsync();
+    }
 
 
     public void ChangeTrackerClear()

@@ -17,6 +17,13 @@ public class Context : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Achievement>()
+            .ToTable("Achievements")
+            .HasDiscriminator<string>("AchievementType")
+            .HasValue<SportAchievement>("Sport")
+            .HasValue<AcademicAchievement>("Academic")
+            .HasValue<ArtAchievement>("Art");
     }
 }

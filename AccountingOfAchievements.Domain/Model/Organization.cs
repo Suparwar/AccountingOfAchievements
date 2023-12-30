@@ -4,14 +4,14 @@ namespace AccountingOfAchievements.Domain;
 
 public class Organization
 {
-    public string OgrName { get; set; } = String.Empty;
-    public Guid OrganizationID { get; set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; } = String.Empty;
     public List<Achievement> Achievements { get; set; } = new List<Achievement>();
     public void AddAchivement(Achievement achiev)
     {
         Achievements.Add(achiev);
     }
-    public void removeAchievement(Achievement achiev)
+    public void RemoveAchievement(Achievement achiev)
     {
         Achievements.Remove(achiev);
     }
