@@ -1,0 +1,51 @@
+﻿@inject HttpClient Http
+@page "/organization"
+
+<PageTitle>Организации</PageTitle>
+
+<h1>Организации</h1>
+
+
+<div class="row">
+    <div class="col mb-4">
+        <a class="btn btn-primary" href="/newAchievement">Опубликовать достижение</a>
+        <a class="btn btn-primary" href="/newOrganization">Новая организация</a>
+    </div>
+</div>
+
+@if(organizations == null)
+{
+    <p><em>Загрузка...</em></p>
+}
+else
+{
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Название</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var organization in organizations)
+            {
+                <tr>
+                    <td>@organization.Id.ToString()</td>
+                    <td>@organization.Name</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+@code {
+    private List<OrganizationDTO> organizations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        organizations = await Http.GetFromJsonAsync<List<OrganizationDTO>>("https://localhost:7169/api/organization");
+    }
+}

@@ -27,10 +27,10 @@ public class OrganizationController : ControllerBase
 
     // GET: api/<AchievementController>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Organization>>> GetOrganizations()
+    public async Task<ActionResult<IEnumerable<OrganizationDTO>>> GetOrganizations()
     {
         var organizations = await _organizationsRepository.GetAllAsync();
-        return organizations;
+        return OrganizationDTOMapper.ToDto(organizations);
     }
 
     // GET api/<AchievementController>/5

@@ -45,13 +45,6 @@ public class TestHelper
         _context.Achievements.Add(achievement);
         _context.SaveChanges();
 
-
-
-
-
-
-
-
         //Запрещаем отслеживание (разрываем связи с БД)
         _context.ChangeTracker.Clear();
     }

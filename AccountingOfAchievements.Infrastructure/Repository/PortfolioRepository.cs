@@ -38,7 +38,9 @@ public class PortfolioRepository
     }
     public async Task<List<Portfolio>> GetAllAsync()
     {
-        return await _context.Portfolios.OrderBy(o => o.UserName).ToListAsync();
+        return await _context.Portfolios
+            .OrderBy(o => o.UserName)
+            .ToListAsync();
     }
   
 

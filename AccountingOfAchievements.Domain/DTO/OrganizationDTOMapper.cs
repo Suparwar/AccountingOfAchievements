@@ -21,4 +21,15 @@ public class OrganizationDTOMapper
 
         return organizationDto;
     }
+
+    public static List<OrganizationDTO> ToDto(List<Organization> organizations)
+    {
+        var organizationsDto = new List<OrganizationDTO>();
+        foreach(var organization in organizations)
+        {
+            organizationsDto.Add(ToDto(organization));
+        }
+
+        return organizationsDto;
+    }
 }

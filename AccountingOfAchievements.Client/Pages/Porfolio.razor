@@ -1,0 +1,67 @@
+﻿@inject HttpClient Http
+@page "/porfolio"
+
+<PageTitle>Портфолио</PageTitle>
+
+<h1>Портфолио</h1>
+
+
+<div class="row">
+    <div class="col mb-4">
+        <a class="btn btn-primary" href="/newPorfolio">Новое портфолио</a>
+        <a class="btn btn-primary" href="/">Выбрать новое достижение</a>
+        <a class="btn btn-primary" href="/">Убрать достижение</a>      
+    </div>
+</div>
+
+<div class="row">
+    <div class="col mb-4">
+        <input type="text" class="form-control" id="Title" placeholder="Введите id">
+        <a class="btn btn-primary" >Найти</a>
+    </div>
+</div>
+
+
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Тип</th>
+                <th>Дата</th>
+                <th>Организация</th>
+                <th>Прочее</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Pavel Solovev</td>
+                <td>Спортивное</td>
+                <td>2023-12-30T12:56:24.919</td>
+                <td>BonchBruevicha</td>
+                <td>Вид спорта: Баскетбол. Команда: "FDC"</td>
+            </tr>
+            <tr>
+                <td>Pavel Solovev</td>
+                <td>Творческое</td>
+                <td>2023-10-30T09:06:24.919</td>
+                <td>Yandex</td>
+                <td>Соревнование: Чтение стихов. Этап: "Региональный этап"</td>
+            </tr>
+            <tr>
+                <td>Pavel Solovev</td>
+                <td>Спортивное</td>
+                <td>2020-12-30T12:00:00.059</td>
+                <td></td>
+                <td>Вид спорта: Футбол. Команда: "Барселона"</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+@code {
+
+}

@@ -1,0 +1,25 @@
+﻿@page "/newPorfolio"
+@inject HttpClient Http
+
+<h2>Добавить новое портфолио</h2>
+<hr />
+
+<div class="mb-3">
+    <label for="Title" class="form-label">Имя пользователя</label>
+    <input type="text" class="form-control" @bind="OwnerName" id="Title" placeholder="Введите имя">
+</div>
+
+<button type="submit" class="btn btn-primary" @onclick="(async () => await AddPortfolio())">Создать</button>
+
+
+@code {
+    private string OwnerName = string.Empty;
+
+    private async Task AddPortfolio()
+    {
+        PortfolioDTO portfolioDTO = new();
+        portfolioDTO.UserName = OwnerName;
+
+        await Http.PostAsJsonAsync("https://localhost:7169/api/Portfolio", portfolioDTO);
+    }
+}

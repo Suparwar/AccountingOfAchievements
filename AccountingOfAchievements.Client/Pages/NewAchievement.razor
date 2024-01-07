@@ -1,0 +1,87 @@
+﻿@page "/newAchievement"
+@inject HttpClient Http
+
+<PageTitle>Опубликовать новое достижение</PageTitle>
+
+<h2>Опубликовать новое достижение</h2>
+<hr />
+
+<div class="mb-3">
+    <label for="Type" class="form-label">Вид достижения</label>
+    <select class="form-select" @bind="Type" id="Type">
+        @foreach (var type in choiseType)
+        {
+            <option value="@Type">@type</option>
+        }
+    </select>
+</div>
+
+<div class="mb-3">
+    <label for="owner" class="form-label">Награждаемый</label>
+    <input type="text" class="form-control" @bind="PortfilioId" placeholder="Введите id владельца">
+</div>
+
+<div class="mb-3">
+    <label for="owner" class="form-label">Организация</label>
+    <select class="form-select" @bind="OrganizationName">
+        @foreach (var org in organizations)
+        {
+            <option value="@org.Name">@OrganizationName</option>
+        }
+    </select>
+</div>
+
+<div class="mb-3">
+    <label for="DateOfReceiving" class="form-label">Дата получения</label>
+    <input type="date" class="form-control" @bind="DateOfReceiving" id="date">
+</div>
+
+
+<button type="submit" class="btn btn-primary" @onclick="(async () => await AddAchievement())">Создать</button>
+
+
+@code {
+    private List<string> choiseType = new List<string>() { "Спортивное", "Научное", "Творческое" };
+    private List<OrganizationDTO> organizations;
+
+    private string Type;
+    private string KindOfSport;
+    private string TeamName;
+    private Guid PortfilioId;
+    private DateTime DateOfReceiving;
+    private Guid OrganizationId;
+    private string OrganizationName;
+    private string NameOfCompet;
+    private string AreaStage;
+
+    private async Task AddAchievement()
+    {
+        AchievementSportDTO achievement = new();
+
+        achievement.OrganizationId = OrganizationId;
+        achievement.PortfilioId = PortfilioId;
+        achievement.DateOfReceiving = DateOfReceiving;
+        achievement.TeamName = TeamName;
+
+
+        if(Type == "Спортивное"){
+            await Http.PostAsJsonAsync("https://localhost:7169/api/Achievement/sport", achievement); 
+            return;
+        }
+
+        if (Type == "Научное"){
+            await Http.PostAsJsonAsync("https://localhost:7169/api/Achievement/academic", achievement); 
+            return;
+        }
+
+        if (Type == "Творческое"){
+            await Http.PostAsJsonAsync("https://localhost:7169/api/Achievement/art", achievement); 
+            return;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        organizations = await Http.GetFromJsonAsync<List<OrganizationDTO>>("sample-data/organization.json");
+    }
+}

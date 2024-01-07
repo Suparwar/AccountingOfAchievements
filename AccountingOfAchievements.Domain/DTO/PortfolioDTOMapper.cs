@@ -22,7 +22,19 @@ public class PortfolioDTOMapper
     {
         var portfolioDTO = new PortfolioDTO();
         portfolioDTO.Id = portfolio.Id;
-        portfolioDTO.UserName = portfolioDTO.UserName;
+        portfolioDTO.UserName = portfolio.UserName;
+        portfolioDTO.AchievementsDTO = AchievementDTOMapper.ToDto(portfolio.Achievements);
+
+        return portfolioDTO;
+    }
+
+    public static List<PortfolioDTO> ToDto(List<Portfolio> portfolios)
+    {
+        var portfolioDTO = new List<PortfolioDTO>();
+        foreach(var portfolio in portfolios)
+        {
+            portfolioDTO.Add(ToDto(portfolio));
+        }
 
         return portfolioDTO;
     }

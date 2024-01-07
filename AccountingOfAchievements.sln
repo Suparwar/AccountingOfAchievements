@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountingOfAchievements.Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountingOfAchievements.Infrastructure", "AccountingOfAchievements.Infrastructure\AccountingOfAchievements.Infrastructure.csproj", "{D5DE3301-6144-418C-8985-43BD83A17ACE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAchievement", "TestAchievement\TestAchievement.csproj", "{29211EF5-0983-49AE-86F2-AA606CAB30A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAchievement", "TestAchievement\TestAchievement.csproj", "{29211EF5-0983-49AE-86F2-AA606CAB30A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountingOfAchievements.Client", "AccountingOfAchievements.Client\AccountingOfAchievements.Client.csproj", "{0F761BC8-D184-4499-ABBD-04F20465FCB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{29211EF5-0983-49AE-86F2-AA606CAB30A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29211EF5-0983-49AE-86F2-AA606CAB30A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29211EF5-0983-49AE-86F2-AA606CAB30A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F761BC8-D184-4499-ABBD-04F20465FCB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F761BC8-D184-4499-ABBD-04F20465FCB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F761BC8-D184-4499-ABBD-04F20465FCB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F761BC8-D184-4499-ABBD-04F20465FCB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

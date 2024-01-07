@@ -1,0 +1,27 @@
+﻿@page "/newOrganization"
+@inject HttpClient Http
+
+<PageTitle>Опубликовать новое достижение</PageTitle>
+
+<h2>Создать организацию</h2>
+<hr />
+
+<div class="mb-3">
+    <label for="Title" class="form-label">Название организации</label>
+    <input type="text" class="form-control" @bind="OrgName" id="Title" placeholder="Введите название">
+</div>
+
+<button type="submit" class="btn btn-primary" @onclick="(async () => await AddOrganization())">Создать</button>
+
+
+@code {
+    private string OrgName = string.Empty;
+
+    private async Task AddOrganization()
+    {
+        OrganizationDTO organizationDTO = new();
+        organizationDTO.Name = OrgName;
+
+        await Http.PostAsJsonAsync("https://localhost:7169/api/Organization", organizationDTO);
+    }
+}

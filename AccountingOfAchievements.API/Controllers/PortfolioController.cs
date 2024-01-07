@@ -30,10 +30,10 @@ public class PortfolioController : ControllerBase
 
     // GET: api/<PortfolioController>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Portfolio>>> GetPortfolios()
+    public async Task<ActionResult<IEnumerable<PortfolioDTO>>> GetPortfolios()
     {
         var portfolios = await _portfolioRepository.GetAllAsync();
-        return portfolios;
+        return PortfolioDTOMapper.ToDto(portfolios);
     }
 
     // GET api/<PortfolioController>/5
